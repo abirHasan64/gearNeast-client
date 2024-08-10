@@ -1,10 +1,24 @@
 import { Link } from "react-router-dom";
 import loginImg from "../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+
   const handleSignup = (event) => {
     event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, email, password);
+
+    createUser(name, email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => console.log(err.message));
   };
   return (
     <div>
@@ -18,7 +32,7 @@ const SignUp = () => {
               Sign Up
             </h1>
             <form onSubmit={handleSignup} className="card-body">
-            <div className="form-control">
+              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
