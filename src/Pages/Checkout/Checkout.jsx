@@ -14,7 +14,7 @@ const Checkout = () => {
     const email = user?.email;
     const booking = {
       customerName: name,
-      customerEmail: email,
+      email,
       bookingDate: date,
       img: img,
       service: title,
